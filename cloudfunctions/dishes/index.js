@@ -22,10 +22,11 @@ exports.main = async (event) => {
 
 // ---------- 菜品列表（分页+分类筛选+仅上架）----------
 async function listDishes(event) {
-  const { categoryId, page = 1, pageSize = 10, mealType } = event;
+  const { categoryId, page = 1, pageSize = 10, mealType, isRecommend } = event;
   const skip = (page - 1) * pageSize;
 
   const where = { isOnSale: true };
+  if (isRecommend) where.isRecommend = true;
   if (categoryId) where.categoryId = categoryId;
   if (mealType) where.mealType = _.in([mealType, 'all']);
 
