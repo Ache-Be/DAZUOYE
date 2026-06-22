@@ -118,7 +118,10 @@
     <button class="bar-btn confirm" bindtap="handleConfirm" disabled="{{isOperating}}">确认收货</button>
   </block>
   <block wx:else>
-    <view class="bar-info">
+    <block wx:if="{{canReview}}">
+      <button class="bar-btn review" bindtap="handleGoReview">去评价 ⭐</button>
+    </block>
+    <view wx:else class="bar-info">
       <text wx:if="{{order.status === 'completed'}}">订单已完成</text>
       <text wx:elif="{{order.status === 'cancelled'}}">订单已取消</text>
       <text wx:else>订单{{statusText}}</text>

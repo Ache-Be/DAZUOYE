@@ -12,6 +12,7 @@ Page({
     isLoading: true,
     quantity: 1,            // 购买数量
     canAdd: true,           // 库存是否充足
+    reviews: [],            // 用户评价列表
   },
 
   onLoad(options) {
@@ -39,8 +40,17 @@ Page({
         dish.priceText = fmt(dish.price);
         dish.originPriceText = dish.originalPrice > dish.price ? fmt(dish.originalPrice) : '';
         dish.ratingText = dish.rating ? dish.rating.toFixed(1) : '';
+
+        // 格式化评价
+        const reviews = (dish.reviews || []).map(r => ({
+          ...r,
+          stars: Array.from({ length: 5 }, (_, i) => i < r.rating),
+          timeText: r.timeText || '',
+        }));
+
         this.setData({
           dish,
+          reviews,
           isLoading: false,
           canAdd: dish.stock > 0
         });
@@ -139,5 +149,15 @@ Page({
       urls: [dish.image],
       current: dish.image
     });
-  }
+  },
+
+  /**
+   * 预览评价图片
+   */
+  handlePreviewReviewImage(e) {
+    const { url, index } = e.currentTarget.dataset;
+    const review = this.data.reviews[index];
+    if (!url || !review) return;
+    wx.previewImage({ current: url, urls: review.images || [url] });
+  },
 });

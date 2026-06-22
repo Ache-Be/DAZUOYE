@@ -1,0 +1,31 @@
+<view class="container">
+  <!-- 输入取餐码 -->
+  <view class="input-card">
+    <text class="label">输入取餐码</text>
+    <view class="input-row">
+      <input type="text" maxlength="10" placeholder="请输入取餐码" value="{{code}}" bindinput="onCodeInput" confirm-type="done" bindconfirm="handleVerify" />
+      <button class="verify-btn" bindtap="handleVerify" disabled="{{!code || verifying}}">{{verifying ? '核销中...' : '核销'}}</button>
+    </view>
+  </view>
+
+  <!-- 核销结果 -->
+  <view wx:if="{{result}}" class="result-card">
+    <view class="result-icon">{{result.success ? '✅' : '❌'}}</view>
+    <view class="result-title {{result.success ? 'success' : 'fail'}}">{{result.success ? '核销成功' : '核销失败'}}</view>
+    <view class="result-msg">{{result.message}}</view>
+    <view wx:if="{{result.success && result.data}}" class="result-detail">
+      <view class="row"><text class="lbl">订单号</text><text class="val">{{result.data.orderNo}}</text></view>
+      <view class="row"><text class="lbl">菜品</text><text class="val">{{result.data.dishes}}</text></view>
+    </view>
+  </view>
+
+  <!-- 核销记录 -->
+  <view wx:if="{{history.length > 0}}" class="history-section">
+    <text class="title">核销记录</text>
+    <view wx:for="{{history}}" wx:for-item="h" wx:key="*this" class="history-item">
+      <text class="code">{{h.code}}</text>
+      <text class="status {{h.success ? 'ok' : 'fail'}}">{{h.success ? '✓ 成功' : '✗ ' + h.message}}</text>
+      <text class="time">{{h.time}}</text>
+    </view>
+  </view>
+</view>

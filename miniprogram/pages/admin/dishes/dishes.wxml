@@ -1,0 +1,24 @@
+<view class="container">
+  <view wx:if="{{isLoading}}" class="loading-tip">加载中...</view>
+  <view wx:elif="{{isEmpty}}" class="empty-tip">暂无菜品数据</view>
+
+  <view wx:else class="dish-list">
+    <view wx:for="{{dishes}}" wx:key="_id" class="dish-card">
+      <image class="dish-img" src="{{item.image || '../../../images/default-goods-image.png'}}" mode="aspectFill" />
+      <view class="dish-info">
+        <view class="dish-name">{{item.name}}</view>
+        <view class="dish-desc">{{item.categoryName || ''}}</view>
+        <view>
+          <text class="dish-price">¥{{item.priceText}}</text>
+          <text class="dish-stock">库存: {{item.stock}}</text>
+        </view>
+      </view>
+      <view class="dish-extra">
+        <view wx:if="{{!item.isOnSale}}" class="off-badge">已下架</view>
+        <view class="switch {{item.isOnSale ? 'on' : ''}}" data-dishid="{{item._id}}" data-onsale="{{item.isOnSale}}" bindtap="toggleSale">
+          <view class="dot"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

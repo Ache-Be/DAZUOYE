@@ -75,7 +75,7 @@ Page({
         finalPriceText: fmt(order.finalPrice),
         deliveryFeeText: fmt(order.deliveryFee || 0),
         totalPriceText: fmt(order.totalPrice),
-        canPay, canCancel, canConfirm
+        canPay, canCancel, canConfirm, canReview: order.status === 'completed',
       });
     } catch (err) {
       console.error('加载订单失败:', err);
@@ -171,6 +171,11 @@ Page({
         }
       }
     });
+  },
+
+  // ============ 去评价 ============
+  handleGoReview() {
+    wx.navigateTo({ url: `/pages/review/review?id=${this.data.order._id}` });
   },
 
   // ============ 复制取餐码 ============

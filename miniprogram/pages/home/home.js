@@ -137,6 +137,9 @@ Page({
 
       if (res.result && res.result.success) {
         const { list, total, page: curPage, hasMore } = res.result.data;
+        // 调试：看图片 URL
+        const first = list[0];
+        if (first) console.log('🖼️ [home] 第一道菜 image:', JSON.stringify(first.image));
         // 预格式化价格
         const formatted = list.map(d => ({
           ...d,

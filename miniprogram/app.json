@@ -7,7 +7,13 @@
     "pages/checkout/checkout",
     "pages/order-detail/order-detail",
     "pages/cart/cart",
+    "pages/address/address",
     "pages/user/user",
+    "pages/my-reviews/my-reviews",
+    "pages/review/review",
+    "pages/admin/verify/verify",
+    "pages/admin/dishes/dishes",
+    "pages/admin/orders/orders",
     "pages/index/index",
     "pages/example/index"
   ],

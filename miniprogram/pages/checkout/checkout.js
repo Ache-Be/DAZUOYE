@@ -154,7 +154,7 @@ Page({
     this.setData({ showAddressPicker: false });
   },
   goAddAddress() {
-    wx.showToast({ title: '地址管理开发中', icon: 'none' });
+    wx.navigateTo({ url: '/pages/address/address' });
   },
 
   // ============ 配送时间 ============

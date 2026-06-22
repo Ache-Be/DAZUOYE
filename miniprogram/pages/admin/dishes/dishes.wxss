@@ -1,0 +1,21 @@
+page { background: #f8f8f8; }
+
+.loading-tip { text-align: center; padding: 60rpx; color: #999; font-size: 26rpx; }
+.empty-tip { text-align: center; padding: 100rpx 0; color: #ccc; font-size: 28rpx; }
+
+.dish-list { padding: 20rpx; }
+.dish-card { background: #fff; border-radius: 14rpx; padding: 24rpx; margin-bottom: 16rpx; display: flex; align-items: center; }
+.dish-img { width: 100rpx; height: 100rpx; border-radius: 10rpx; background: #f5f5f5; margin-right: 16rpx; }
+.dish-info { flex: 1; }
+.dish-name { font-size: 28rpx; font-weight: 600; color: #333; }
+.dish-desc { font-size: 22rpx; color: #999; margin-top: 4rpx; }
+.dish-price { font-size: 26rpx; color: #ff6b35; font-weight: 600; margin-top: 4rpx; }
+.dish-stock { font-size: 22rpx; color: #999; margin-left: 12rpx; }
+.dish-extra { text-align: right; }
+.off-badge { display: inline-block; background: #f5f5f5; color: #999; font-size: 22rpx; padding: 4rpx 12rpx; border-radius: 6rpx; margin-bottom: 8rpx; }
+
+/* switch */
+.switch { position: relative; width: 88rpx; height: 48rpx; background: #e0e0e0; border-radius: 24rpx; transition: 0.2s; }
+.switch.on { background: #07c160; }
+.switch .dot { position: absolute; top: 4rpx; left: 4rpx; width: 40rpx; height: 40rpx; background: #fff; border-radius: 50%; transition: 0.2s; box-shadow: 0 2rpx 4rpx rgba(0,0,0,0.1); }
+.switch.on .dot { left: 44rpx; }
