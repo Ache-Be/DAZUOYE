@@ -10,6 +10,11 @@ Page({
     this.loadDishes();
   },
 
+  editDish(e) {
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({ url: `/pages/admin/dish-edit/dish-edit?id=${id}` });
+  },
+
   onPullDownRefresh() {
     this.loadDishes();
   },

@@ -6,7 +6,7 @@ page { background: #f8f8f8; }
 .dish-list { padding: 20rpx; }
 .dish-card { background: #fff; border-radius: 14rpx; padding: 24rpx; margin-bottom: 16rpx; display: flex; align-items: center; }
 .dish-img { width: 100rpx; height: 100rpx; border-radius: 10rpx; background: #f5f5f5; margin-right: 16rpx; }
-.dish-info { flex: 1; }
+.dish-info { flex: 1; padding: 4rpx 0; }
 .dish-name { font-size: 28rpx; font-weight: 600; color: #333; }
 .dish-desc { font-size: 22rpx; color: #999; margin-top: 4rpx; }
 .dish-price { font-size: 26rpx; color: #ff6b35; font-weight: 600; margin-top: 4rpx; }

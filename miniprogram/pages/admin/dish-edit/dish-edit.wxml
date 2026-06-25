@@ -1,0 +1,75 @@
+<view class="form">
+  <view class="form-card">
+    <view class="field">
+      <text class="field-label">菜品名称</text>
+      <input class="field-input" placeholder="请输入名称" value="{{form.name}}" bindinput="onField" data-field="name" />
+    </view>
+    <view class="field-row">
+      <view class="field">
+        <text class="field-label">价格（分）</text>
+        <input class="field-input" type="number" placeholder="单位:分" value="{{form.price}}" bindinput="onField" data-field="price" />
+      </view>
+      <view class="field">
+        <text class="field-label">原价（分）</text>
+        <input class="field-input" type="number" placeholder="单位:分" value="{{form.originalPrice}}" bindinput="onField" data-field="originalPrice" />
+      </view>
+    </view>
+    <view class="field-row">
+      <view class="field">
+        <text class="field-label">库存</text>
+        <input class="field-input" type="number" placeholder="库存数量" value="{{form.stock}}" bindinput="onField" data-field="stock" />
+      </view>
+      <view class="field">
+        <text class="field-label">排序</text>
+        <input class="field-input" type="number" placeholder="越小越靠前" value="{{form.sort}}" bindinput="onField" data-field="sort" />
+      </view>
+    </view>
+  </view>
+
+  <view class="form-card">
+    <text class="field-label">分类</text>
+    <view class="category-list">
+      <view wx:for="{{categories}}" wx:key="_id"
+            class="category-tag {{form.categoryId === item._id ? 'active' : ''}}"
+            data-cid="{{item._id}}"
+            bindtap="selectCategory">{{item.name}}</view>
+    </view>
+  </view>
+
+  <view class="form-card">
+    <text class="field-label">菜品图片</text>
+    <view class="img-uploader" bindtap="chooseImage">
+      <image wx:if="{{form.image}}" class="img-preview" src="{{form.image}}" mode="aspectFill" />
+      <view wx:elif="{{uploading}}" class="img-placeholder">
+        <text style="font-size:24rpx;color:#999;">上传中...</text>
+      </view>
+      <view wx:else class="img-placeholder">
+        <text class="img-plus">+</text>
+        <text class="img-hint">点击上传</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-card">
+    <view class="field">
+      <text class="field-label">描述</text>
+      <textarea class="field-textarea" placeholder="菜品描述" value="{{form.description}}" bindinput="onField" data-field="description" />
+    </view>
+    <view class="field">
+      <text class="field-label">食材 / 配料</text>
+      <input class="field-input" placeholder="如:鸡肉、土豆" value="{{form.ingredients}}" bindinput="onField" data-field="ingredients" />
+    </view>
+  </view>
+
+  <view class="form-card">
+    <view class="switch-row">
+      <text class="label">推荐菜品</text>
+      <view class="switch {{form.isRecommend ? 'on' : ''}}" bindtap="toggleRecommend">
+        <view class="dot"></view>
+      </view>
+    </view>
+  </view>
+
+  <button class="submit-btn" bindtap="handleSave" disabled="{{saving}}">{{saving ? '保存中...' : '保存'}}</button>
+  <view style="height:40rpx;"></view>
+</view>

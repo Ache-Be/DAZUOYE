@@ -163,10 +163,6 @@ Page({
         );
 
       await Promise.all(tasks);
-
-      // 更新菜品评分
-      await this.updateDishRatings();
-
       wx.hideLoading();
       wx.showToast({ title: '评价成功', icon: 'success' });
       setTimeout(() => wx.navigateBack(), 1000);
@@ -175,28 +171,6 @@ Page({
       wx.hideLoading();
       wx.showToast({ title: '提交失败，请重试', icon: 'none' });
       this.setData({ submitting: false });
-    }
-  },
-
-  // 更新菜品平均评分
-  async updateDishRatings() {
-    const dishIds = [...new Set(this.data.reviews.filter(r => r.rating > 0).map(r => r.dishId))];
-    if (dishIds.length === 0) return;
-
-    try {
-      const db = wx.cloud.database();
-      for (const dishId of dishIds) {
-        const { data: reviews } = await db.collection('reviews')
-          .where({ dishId })
-          .get();
-        if (reviews.length === 0) continue;
-        const avgRating = Math.round(reviews.reduce((s, r) => s + r.rating, 0) / reviews.length * 10) / 10;
-        await db.collection('dishes').doc(dishId).update({
-          data: { rating: avgRating, ratingCount: reviews.length }
-        });
-      }
-    } catch (err) {
-      console.error('更新菜品评分失败:', err);
     }
   },
 });

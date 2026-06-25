@@ -46,6 +46,12 @@ Page({
           ...item,
           priceText: fmtPrice(item.price)
         }));
+        // 更新购物车角标
+        if (totalCount > 0) {
+          wx.setTabBarBadge({ index: 2, text: totalCount > 99 ? '99+' : String(totalCount) });
+        } else {
+          wx.removeTabBarBadge({ index: 2 });
+        }
         this.setData({
           cartList,
           totalPrice,

@@ -1,6 +1,9 @@
 // pages/home/home.js
 const app = getApp();
 
+const CACHE_KEY = 'home_cache';
+const CACHE_TTL = 5 * 60 * 1000; // 5分钟
+
 /** 格式化价格：分→元 */
 function fmt(c) { return (c / 100).toFixed(0); }
 function fmtDiscount(sale, orig) { return (sale / orig * 10).toFixed(1); }
@@ -27,12 +30,14 @@ Page({
   },
 
   onLoad() {
+    this.loadFromCache();
     this.loadCategories();
   },
 
   onShow() {
     if (app.globalData.userInfo) {
       this.updateCartBadge();
+      this.updateOrderBadge();
     }
   },
 
@@ -72,6 +77,7 @@ Page({
         });
         // 加载第一个分类的菜品
         await this.loadDishes(true);
+        this.saveToCache();
       } else {
         // 分类数据为空（可能未初始化数据库）
         const errMsg = (res.result && res.result.message) || '分类数据为空，请先初始化数据库';
@@ -137,9 +143,6 @@ Page({
 
       if (res.result && res.result.success) {
         const { list, total, page: curPage, hasMore } = res.result.data;
-        // 调试：看图片 URL
-        const first = list[0];
-        if (first) console.log('🖼️ [home] 第一道菜 image:', JSON.stringify(first.image));
         // 预格式化价格
         const formatted = list.map(d => ({
           ...d,
@@ -159,6 +162,7 @@ Page({
           isError: false,
           isLoading: false
         });
+        this.saveToCache();
       } else {
         const errMsg = (res.result && res.result.message) || '加载菜品失败';
         this.setData({
@@ -225,6 +229,36 @@ Page({
     }
   },
 
+  // ==================== 首页缓存 ====================
+  loadFromCache() {
+    try {
+      const cache = wx.getStorageSync(CACHE_KEY);
+      if (!cache) return;
+      const { categories, activeCategoryId, dishList, total, timestamp } = cache;
+      if (Date.now() - timestamp > CACHE_TTL) return;
+      this.setData({
+        categories,
+        activeCategoryId,
+        dishList,
+        total,
+        isLoading: false,
+        isEmpty: dishList.length === 0
+      });
+    } catch (e) { /* 静默 */ }
+  },
+
+  saveToCache() {
+    try {
+      wx.setStorageSync(CACHE_KEY, {
+        categories: this.data.categories,
+        activeCategoryId: this.data.activeCategoryId,
+        dishList: this.data.dishList,
+        total: this.data.total,
+        timestamp: Date.now()
+      });
+    } catch (e) { /* 静默 */ }
+  },
+
   // ==================== 重试加载 ====================
   handleRetry() {
     this.loadCategories();
@@ -257,6 +291,25 @@ Page({
       }
     } catch (err) {
       // 静默处理
+    }
+  },
+
+  // ==================== 更新订单角标 ====================
+  async updateOrderBadge() {
+    const openid = app.globalData.userInfo?.openid;
+    if (!openid) return;
+    try {
+      const db = wx.cloud.database();
+      const { total } = await db.collection('orders')
+        .where({ userId: openid, status: 'pending_pay' })
+        .count();
+      if (total > 0) {
+        wx.setTabBarBadge({ index: 1, text: total > 99 ? '99+' : String(total) });
+      } else {
+        wx.removeTabBarBadge({ index: 1 });
+      }
+    } catch (e) {
+      // 静默
     }
   }
 });

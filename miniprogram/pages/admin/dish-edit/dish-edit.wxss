@@ -1,0 +1,31 @@
+page { background: #f8f8f8; }
+
+.form { padding: 20rpx; }
+.form-card { background: #fff; border-radius: 14rpx; padding: 24rpx; margin-bottom: 16rpx; }
+.field { margin-bottom: 24rpx; }
+.field:last-child { margin-bottom: 0; }
+.field-label { font-size: 26rpx; color: #666; margin-bottom: 10rpx; display: block; }
+.field-input { width: 100%; height: 72rpx; background: #f8f8f8; border-radius: 10rpx; padding: 0 16rpx; font-size: 28rpx; box-sizing: border-box; }
+.field-textarea { width: 100%; min-height: 120rpx; background: #f8f8f8; border-radius: 10rpx; padding: 16rpx; font-size: 28rpx; box-sizing: border-box; }
+.field-row { display: flex; gap: 16rpx; }
+.field-row .field { flex: 1; }
+
+.switch-row { display: flex; justify-content: space-between; align-items: center; padding: 10rpx 0; }
+.switch-row .label { font-size: 28rpx; color: #333; }
+.switch { position: relative; width: 88rpx; height: 48rpx; background: #e0e0e0; border-radius: 24rpx; transition: 0.2s; }
+.switch.on { background: #07c160; }
+.switch .dot { position: absolute; top: 4rpx; left: 4rpx; width: 40rpx; height: 40rpx; background: #fff; border-radius: 50%; transition: 0.2s; box-shadow: 0 2rpx 4rpx rgba(0,0,0,0.1); }
+.switch.on .dot { left: 44rpx; }
+
+.category-list { display: flex; flex-wrap: wrap; gap: 12rpx; }
+.category-tag { padding: 10rpx 24rpx; border-radius: 8rpx; font-size: 26rpx; background: #f0f0f0; color: #666; }
+.category-tag.active { background: #fff3e8; color: #ff6b35; font-weight: 600; }
+
+.submit-btn { margin-top: 20rpx; height: 88rpx; line-height: 88rpx; background: linear-gradient(135deg, #ff6b35, #ff8c5a); color: #fff; border-radius: 44rpx; font-size: 32rpx; font-weight: 600; border: none; }
+.submit-btn[disabled] { opacity: 0.5; }
+
+.img-uploader { width: 200rpx; height: 200rpx; border-radius: 12rpx; overflow: hidden; }
+.img-preview { width: 200rpx; height: 200rpx; }
+.img-placeholder { width: 200rpx; height: 200rpx; border: 2rpx dashed #ddd; border-radius: 12rpx; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.img-plus { font-size: 56rpx; color: #ccc; line-height: 1; }
+.img-hint { font-size: 22rpx; color: #ccc; margin-top: 8rpx; }

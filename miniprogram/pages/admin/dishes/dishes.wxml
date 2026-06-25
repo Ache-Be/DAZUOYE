@@ -5,7 +5,7 @@
   <view wx:else class="dish-list">
     <view wx:for="{{dishes}}" wx:key="_id" class="dish-card">
       <image class="dish-img" src="{{item.image || '../../../images/default-goods-image.png'}}" mode="aspectFill" />
-      <view class="dish-info">
+      <view class="dish-info" data-id="{{item._id}}" bindtap="editDish">
         <view class="dish-name">{{item.name}}</view>
         <view class="dish-desc">{{item.categoryName || ''}}</view>
         <view>

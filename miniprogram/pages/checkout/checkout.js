@@ -293,10 +293,12 @@ Page({
 
   // ============ 辅助 ============
   async clearCartQuietly() {
+    const dishIds = this.data.items.map(i => i.dishId);
     try {
-      await wx.cloud.callFunction({ name: 'cart', data: { action: 'clear' } });
+      const res = await wx.cloud.callFunction({ name: 'cart', data: { action: 'clear', dishIds } });
+      console.log('清除购物车结果:', res);
     } catch (e) {
-      // 静默
+      console.error('清除购物车失败:', e);
     }
   }
 });

@@ -8,13 +8,13 @@ Page({
     menuList: [
       { icon: '📋', title: '我的订单', desc: '查看所有订单', url: '/pages/order-list/order-list' },
       { icon: '📍', title: '收货地址', desc: '管理配送地址', url: '/pages/address/address' },
-      { icon: '⭐', title: '我的评价', desc: '查看我的评价', url: '/pages/my-reviews/my-reviews' },
+      { icon: '⭐', title: '我的评价', desc: '查看我的评价', url: '' },
       { icon: '🔔', title: '消息通知', desc: '订单通知与提醒', url: '' },
     ],
     adminMenuList: [
-      { icon: '🔍', title: '核销管理', desc: '核验取餐凭证', url: '/pages/admin/verify/verify' },
-      { icon: '🍽️', title: '菜品管理', desc: '上下架与编辑菜品', url: '/pages/admin/dishes/dishes' },
-      { icon: '📊', title: '订单管理', desc: '查看所有订单', url: '/pages/admin/orders/orders' },
+      { icon: '🔍', title: '核销管理', desc: '核验取餐凭证', url: '' },
+      { icon: '🍽️', title: '菜品管理', desc: '上下架与编辑菜品', url: '' },
+      { icon: '📊', title: '订单管理', desc: '查看所有订单', url: '' },
       { icon: '📦', title: '团餐管理', desc: '团餐订单处理', url: '' },
     ],
   },
